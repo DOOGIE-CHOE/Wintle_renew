@@ -1,0 +1,7 @@
+
+create table users(
+username varchar(20) not null,
+email_addres varchar(20) primary key,
+password varchar(70) not null,
+created_date timestamp default current_timestamp);
+
