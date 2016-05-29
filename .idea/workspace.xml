@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="102ef2a4-7ea1-4d54-9f53-9fd16095aa26" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/verify.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/verifytest.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/intro.php" afterPath="$PROJECT_DIR$/intro.php" />
     </list>
     <ignored path="wintle.iws" />
@@ -30,8 +27,8 @@
       <file leaf-file-name="intro.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/intro.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="762">
-              <caret line="442" column="67" selection-start-line="442" selection-start-column="67" selection-end-line="442" selection-end-column="67" />
+            <state relative-caret-position="477">
+              <caret line="430" column="78" selection-start-line="430" selection-start-column="78" selection-end-line="430" selection-end-column="78" />
               <folding>
                 <element signature="n#style#0;n#h2#0;n#div#0;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -56,8 +53,8 @@
       <file leaf-file-name="signin.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/signin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="681">
-              <caret line="119" column="24" selection-start-line="119" selection-start-column="24" selection-end-line="119" selection-end-column="24" />
+            <state relative-caret-position="327">
+              <caret line="80" column="30" selection-start-line="80" selection-start-column="30" selection-end-line="80" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -86,8 +83,8 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/signin.html" />
         <option value="$PROJECT_DIR$/varify.php" />
-        <option value="$PROJECT_DIR$/intro.php" />
         <option value="$PROJECT_DIR$/verify.php" />
+        <option value="$PROJECT_DIR$/intro.php" />
       </list>
     </option>
   </component>
@@ -150,6 +147,20 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wintle_renew" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wintle_renew" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -173,7 +184,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.verifytest.php">
+  <component name="RunManager" selected="JavaScript Debug.intro.php (1)">
     <configuration default="false" name="intro.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/wintle/intro.php">
       <method />
     </configuration>
@@ -228,8 +239,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.verifytest.php" />
-        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.intro.php (1)" />
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.intro.php (1)" />
+        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.verifytest.php" />
         <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.intro.php" />
         <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.signin.php" />
         <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.signin.html" />
@@ -255,12 +266,12 @@
       <workItem from="1464500939998" duration="3208000" />
       <workItem from="1464509577848" duration="23000" />
       <workItem from="1464509852217" duration="6201000" />
-      <workItem from="1464528006922" duration="4021000" />
+      <workItem from="1464528006922" duration="4832000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21582000" />
+    <option name="totallyTimeSpent" value="22393000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="41" y="66" width="1938" height="1048" extended-state="0" />
@@ -506,14 +517,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascript.fullPage.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -554,10 +557,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/verify.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="25" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascript.fullPage.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/intro.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="762">
-          <caret line="442" column="67" selection-start-line="442" selection-start-column="67" selection-end-line="442" selection-end-column="67" />
+        <state relative-caret-position="477">
+          <caret line="430" column="78" selection-start-line="430" selection-start-column="78" selection-end-line="430" selection-end-column="78" />
           <folding>
             <element signature="n#style#0;n#h2#0;n#div#0;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -568,18 +587,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/verify.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="25" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/signin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="119" column="24" selection-start-line="119" selection-start-column="24" selection-end-line="119" selection-end-column="24" />
+        <state relative-caret-position="327">
+          <caret line="80" column="30" selection-start-line="80" selection-start-column="30" selection-end-line="80" selection-end-column="30" />
           <folding />
         </state>
       </provider>

@@ -104,7 +104,7 @@
                 alert("check if you are a robot");
                 return false;
             }
-            
+
             return true;
         }
     </script>
@@ -187,7 +187,7 @@
             opacity: 0.6;
         }
 
-        /* popup control*/
+        /* ------------ popup control -----------*/
         .overlay {
             position: absolute;
             top: 0;
@@ -214,7 +214,7 @@
             padding: 20px;
             background: lightskyblue;
             border-radius: 5px;
-            height: 600px;
+            height: 550px;
             width: 360px;
             position: absolute;
             transition: all 5s ease-in-out;
@@ -413,7 +413,7 @@
             <a class="close" href="#">×</a>
             <br><br>
             <div class="backboard">
-                <div class="SignUp">
+                <div class="SignUp">#
                     <span><img src="img/username.png"></span><span name="wrong" id="username_wrong"
                                                                    style="display: none"
                                                                    onclick="document.getElementById('username').value =''"><img
