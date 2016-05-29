@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+    <script src='https://www.google.com/recaptcha/api.js'></script> <!-- google ReCAPTCHA include-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>wintle</title>
     <!--	<meta name="author" content="Alvaro Trigo Lopez" />
@@ -12,6 +13,36 @@
     -->
     <link rel="stylesheet" type="text/css" href="javascript.fullPage.css"/>
     <link rel="stylesheet" href="css/style.css">
+    <script>
+
+        // check email based on standard expression
+        function validateEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
+
+        function check() {
+            var email = document.getElementById("email_address");
+            if (!validateEmail(email.value)) {
+                document.getElementById("email_wrong").style.display = '';
+               /* email.style.borderTop = '2px solid #ff0000';
+                email.style.borderBottom = '2px solid #ff0000';
+                email.style.borderRight = ' border-right: 1px solid #ff0000';
+                email.style.borderLeft = ' border-right: 1px solid #ff0000';*/
+                email.style.backgroundColor = 'rgba(255, 0, 0, 0.2)';
+
+                return false;
+            }
+            else{
+                document.getElementById("email_wrong").style.display = 'none';
+            }
+
+
+            return false;
+            return true;
+        }
+    </script>
 
     <style>
         /* background video
@@ -152,7 +183,6 @@
 
         /*------------ signup part ------------*/
 
-        
         .SignUp input {
             border: none;
             height: 48px;
@@ -168,6 +198,15 @@
             text-align: center;
             margin-top: 20px;
             margin-left: 6px;
+        }
+
+        .SignUp span[name="wrong"]{
+            display: block;
+            height: 30px;
+            width: 30px;
+            position: absolute;
+            text-align: center;
+            margin-left: 300px;
         }
 
         .SignUp input[type="text"],
@@ -209,12 +248,13 @@
             margin-top: 10px;
             font-size: 15px;
         }
-        .backboard{
+
+        .backboard {
             padding-top: 10px;
             padding-bottom: 10px;
-            padding-left:10px;
-            padding-right:3px;
-            width:350px;
+            padding-left: 10px;
+            padding-right: 3px;
+            width: 350px;
             background-color: whitesmoke;
             border: 1px solid #2c90c6;
             border-radius: 15px;
@@ -222,6 +262,10 @@
             -webkit-border-radius: 15px;
             -ms-border-radius: 15px;
             -o-border-radius: 15px;
+        }
+
+        .g-recaptcha {
+            margin: 7px 0 7px 25px;
         }
 
     </style>
@@ -236,7 +280,7 @@
 				</a>
 			</span>
 			<span class="login">
-				<a href="signin.html">로그인</a>
+				<a href="signin.php">로그인</a>
 				<a href="#popup1">&nbsp;&nbsp;회원가입</a>
 			</span>
     </div>
@@ -298,29 +342,35 @@
 
 
 <div id="popup1" class="overlay">
-    <div class="popup">
-        <h2 style="color:white">Sign up for Wintle</h2>
-        <a class="close" href="#">×</a>
-        <br><br>
-        <div class="backboard">
-            <div class="SignUp">
-                <span><img src="img/username.png"></span><input type="text" name="username" required
-                                                                placeholder="User name" autocomplete="off">
+    <form action="" method="post">
+        <div class="popup">
+            <h2 style="color:white">Sign up for Wintle</h2>
+            <a class="close" href="#">×</a>
+            <br><br>
+            <div class="backboard">
+                <div class="SignUp">
+                    <span><img src="img/username.png"></span><span  name="wrong" id="username_wrong" style="display: none"><img src="img/x.png"></span><input type="text" id="username" required
+                                                                    placeholder="User name" autocomplete="off">
 
-                <span><img src="img/email.png"></span><input type="text" name="email_address" required
-                                                             placeholder="Your email address" autocomplete="off">
+                    <span><img src="img/email.png"></span><span name="wrong" id="email_wrong" style="display: none"><img src="img/x.png"></span><input type="text" id="email_address" required
+                                                                 placeholder="Your email address" autocomplete="off">
 
-                <span><img src="img/password.png"></span><input type="password" name="password" required
-                                                                placeholder="Enter a password" autocomplete="off">
+                    <span><img src="img/password.png"></span><span  name="wrong" id="password_wrong" style="display: none"><img src="img/x.png"></span><input type="password" id="password" required
+                                                                    placeholder="Enter a password" autocomplete="off">
 
-                <span><img src="img/password.png"></span><input type="password" name="repassword" required
-                                                                placeholder="Re-enter a password" autocomplete="off">
+                    <span><img src="img/password.png"></span><span  name="wrong" id="password_wrong" style="display: none"><img src="img/x.png"></span><input type="password" id="repassword" required
+                                                                    placeholder="Re-enter a password"
+                                                                    autocomplete="off">
 
-                <p class="SignUpText">Use at least one letter<br> one numeral, and seven characters.</p>
-                <input type="submit" value="Sign Up for Wintle">
+                    <p class="SignUpText">Use at least one letter<br> one numeral, and seven characters.</p>
+
+                    <div class="g-recaptcha" data-sitekey="6LcZwyATAAAAACFru_oAaZX_UCjGySRbcPFiN9Ye"></div>
+
+                    <input type="submit" name="submit" value="Sign Up for Wintle" onclick="return check()">
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 
 

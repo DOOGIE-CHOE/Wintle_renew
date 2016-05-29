@@ -146,11 +146,11 @@
     </div>
     <div class="backboard">
         <div class="SignUp">
-            <span><img src="img/email.png"></span><input type="text" id="email" required placeholder="Email address" autocomplete="off">
+            <span><img src="img/email.png"></span><input type="text" name="email" id="email" required placeholder="Email address" autocomplete="off">
 
             <span><img src="img/password.png"></span><input type="password" name="password" id="password" required placeholder="Create a password" autocomplete="off">
 
-            <input type="submit" value="Sign In" title="Sign In">
+            <input type="submit" name="submit" value="Sign In" title="Sign In">
         </div>
         <div class="divider">
             <hr class="left"/>OR<hr class="right" />
