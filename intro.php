@@ -15,31 +15,96 @@
     <link rel="stylesheet" href="css/style.css">
     <script>
 
-        // check email based on standard expression
-        function validateEmail(email) {
+        // check email based on regular expression
+        function isValidEmail(email) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
         }
 
+        function isValidUsername(username) {
+            return /^\w+$/.test(username);
+        }
 
+        function isValidPassword(password, repassword) {
+            var errors = [];
+            if (password.length < 8) {
+                errors.push("Your password must be at least 8 characters");
+            }
+            if (password.search(/[a-z]/i) < 0) {
+                errors.push("Your password must contain at least one letter.");
+            }
+            if (password.search(/[0-9]/) < 0) {
+                errors.push("Your password must contain at least one digit.");
+            }
+            if(password != repassword ){
+                errors.push("Check your password");
+            }
+            if (errors.length > 0) {
+                return false;
+            }
+            return true;
+        }
+
+
+        // mark red if condition doesn't match
+        function mark(oj, id, tf) {
+            if (tf == false) {
+                document.getElementById(id).style.display = '';
+                oj.style.backgroundColor = 'rgba(255, 0, 0, 0.2)';
+            }
+            else {
+                oj.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+                document.getElementById(id).style.display = 'none';
+            }
+        }
+
+
+        //sign up conditions
         function check() {
+            //get all elements we need
+            var username = document.getElementById("username");
             var email = document.getElementById("email_address");
-            if (!validateEmail(email.value)) {
-                document.getElementById("email_wrong").style.display = '';
-               /* email.style.borderTop = '2px solid #ff0000';
-                email.style.borderBottom = '2px solid #ff0000';
-                email.style.borderRight = ' border-right: 1px solid #ff0000';
-                email.style.borderLeft = ' border-right: 1px solid #ff0000';*/
-                email.style.backgroundColor = 'rgba(255, 0, 0, 0.2)';
+            var password = document.getElementById("password");
+            var repassword = document.getElementById("repassword");
 
+
+            //username
+            if (!isValidUsername(username.value)) {
+                mark(username, 'username_wrong', false);
+                return false;
+            }
+            else {
+                mark(username, 'username_wrong', true);
+            }
+
+            //email
+            if (!isValidEmail(email.value)) {
+                mark(email, 'email_wrong', false);
+                return false;
+            }
+            else {
+                mark(email, 'email_wrong', true);
+            }
+
+            //password
+            if(!isValidPassword(password.value,repassword.value)){
+                mark(password, 'password_wrong', false);
+                mark(repassword, 'repassword_wrong', false);
                 return false;
             }
             else{
-                document.getElementById("email_wrong").style.display = 'none';
+                mark(password, 'password_wrong', true);
+                mark(repassword, 'repassword_wrong', true);
             }
 
 
-            return false;
+            //reCAPTCHA by google
+            var response = grecaptcha.getResponse();
+            if(response <= 0){
+                alert("check if you are a robot");
+                return false;
+            }
+            
             return true;
         }
     </script>
@@ -200,7 +265,7 @@
             margin-left: 6px;
         }
 
-        .SignUp span[name="wrong"]{
+        .SignUp span[name="wrong"] {
             display: block;
             height: 30px;
             width: 30px;
@@ -342,25 +407,36 @@
 
 
 <div id="popup1" class="overlay">
-    <form action="" method="post">
+    <form action="verify.php" method="post">
         <div class="popup">
             <h2 style="color:white">Sign up for Wintle</h2>
             <a class="close" href="#">×</a>
             <br><br>
             <div class="backboard">
                 <div class="SignUp">
-                    <span><img src="img/username.png"></span><span  name="wrong" id="username_wrong" style="display: none"><img src="img/x.png"></span><input type="text" id="username" required
-                                                                    placeholder="User name" autocomplete="off">
+                    <span><img src="img/username.png"></span><span name="wrong" id="username_wrong"
+                                                                   style="display: none"
+                                                                   onclick="document.getElementById('username').value =''"><img
+                            src="img/x.png"></span><input type="text" id="username" required
+                                                          placeholder="User name" autocomplete="off">
 
-                    <span><img src="img/email.png"></span><span name="wrong" id="email_wrong" style="display: none"><img src="img/x.png"></span><input type="text" id="email_address" required
-                                                                 placeholder="Your email address" autocomplete="off">
+                    <span><img src="img/email.png"></span><span name="wrong" id="email_wrong" style="display: none"
+                                                                onclick="document.getElementById('email_address').value =''"><img
+                            src="img/x.png"></span><input type="text" id="email_address" required
+                                                          placeholder="Your email address" autocomplete="off">
 
-                    <span><img src="img/password.png"></span><span  name="wrong" id="password_wrong" style="display: none"><img src="img/x.png"></span><input type="password" id="password" required
-                                                                    placeholder="Enter a password" autocomplete="off">
+                    <span><img src="img/password.png"></span><span name="wrong" id="password_wrong"
+                                                                   style="display: none"
+                                                                   onclick="document.getElementById('password').value =''"><img
+                            src="img/x.png"></span><input type="password" id="password" required
+                                                          placeholder="Enter a password" autocomplete="off">
 
-                    <span><img src="img/password.png"></span><span  name="wrong" id="password_wrong" style="display: none"><img src="img/x.png"></span><input type="password" id="repassword" required
-                                                                    placeholder="Re-enter a password"
-                                                                    autocomplete="off">
+                    <span><img src="img/password.png"></span><span name="wrong" id="repassword_wrong"
+                                                                   style="display: none"
+                                                                   onclick="document.getElementById('repassword').value =''"><img
+                            src="img/x.png"></span><input type="password" id="repassword" required
+                                                          placeholder="Re-enter a password"
+                                                          autocomplete="off">
 
                     <p class="SignUpText">Use at least one letter<br> one numeral, and seven characters.</p>
 
