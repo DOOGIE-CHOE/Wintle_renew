@@ -454,20 +454,25 @@
 </html>
 
 <?php
-$username = $_POST["username"];
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $username = $_POST["username"];
 $email_address = $_POST["email_address"];
 $password = $_POST["password"];
 
-echo "<script>alert('username is '.$username.')</script>";
+echo "<script>alert('.$username.')</script>";
 
-/*
-echo"<script>
+
+    echo"<script>
             document.getElementById('username').value = '.$username.';
             document.getElementById('email_address').value ='test';
             document.getElementById('password').value ='test';
             document.getElementById('repassword').value ='test' ;
-            </script>";*/
-exit;
+            </script>";
+
+    exit;
+}
 
 class Verification
 {
