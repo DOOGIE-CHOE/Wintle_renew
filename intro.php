@@ -36,7 +36,7 @@
             if (password.search(/[0-9]/) < 0) {
                 errors.push("Your password must contain at least one digit.");
             }
-            if(password != repassword ){
+            if (password != repassword) {
                 errors.push("Check your password");
             }
             if (errors.length > 0) {
@@ -87,12 +87,12 @@
             }
 
             //password
-            if(!isValidPassword(password.value,repassword.value)){
+            if (!isValidPassword(password.value, repassword.value)) {
                 mark(password, 'password_wrong', false);
                 mark(repassword, 'repassword_wrong', false);
                 return false;
             }
-            else{
+            else {
                 mark(password, 'password_wrong', true);
                 mark(repassword, 'repassword_wrong', true);
             }
@@ -100,7 +100,7 @@
 
             //reCAPTCHA by google
             var response = grecaptcha.getResponse();
-            if(response <= 0){
+            if (response <= 0) {
                 alert("check if you are a robot");
                 return false;
             }
@@ -407,7 +407,7 @@
 
 
 <div id="popup1" class="overlay">
-    <form action="verify.php" method="post">
+    <form action="" method="post">
         <div class="popup">
             <h2 style="color:white">Sign up for Wintle</h2>
             <a class="close" href="#">×</a>
@@ -417,24 +417,24 @@
                     <span><img src="img/username.png"></span><span name="wrong" id="username_wrong"
                                                                    style="display: none"
                                                                    onclick="document.getElementById('username').value =''"><img
-                            src="img/x.png"></span><input type="text" id="username" required
+                            src="img/x.png"></span><input type="text" name = "username" id="username" required
                                                           placeholder="User name" autocomplete="off">
 
                     <span><img src="img/email.png"></span><span name="wrong" id="email_wrong" style="display: none"
                                                                 onclick="document.getElementById('email_address').value =''"><img
-                            src="img/x.png"></span><input type="text" id="email_address" required
+                            src="img/x.png"></span><input type="text" name = "email_address "id="email_address" required
                                                           placeholder="Your email address" autocomplete="off">
 
                     <span><img src="img/password.png"></span><span name="wrong" id="password_wrong"
                                                                    style="display: none"
                                                                    onclick="document.getElementById('password').value =''"><img
-                            src="img/x.png"></span><input type="password" id="password" required
-                                                          placeholder="Enter a password" autocomplete="off">
+                            src="img/x.png"></span><input type="password" name = "password" id="password" required
+                                                              placeholder="Enter a password" autocomplete="off">
 
                     <span><img src="img/password.png"></span><span name="wrong" id="repassword_wrong"
                                                                    style="display: none"
                                                                    onclick="document.getElementById('repassword').value =''"><img
-                            src="img/x.png"></span><input type="password" id="repassword" required
+                            src="img/x.png"></span><input type="password" name ="repassword" id="repassword" required
                                                           placeholder="Re-enter a password"
                                                           autocomplete="off">
 
@@ -452,3 +452,154 @@
 
 </body>
 </html>
+
+<?php
+$username = $_POST["username"];
+$email_address = $_POST["email_address"];
+$password = $_POST["password"];
+
+echo "<script>alert('username is '.$username.')</script>";
+
+/*
+echo"<script>
+            document.getElementById('username').value = '.$username.';
+            document.getElementById('email_address').value ='test';
+            document.getElementById('password').value ='test';
+            document.getElementById('repassword').value ='test' ;
+            </script>";*/
+exit;
+
+class Verification
+{
+    /* Google recaptcha API url */
+    private $google_url = "https://www.google.com/recaptcha/api/siteverify";
+    private $secret = '6LcZwyATAAAAAFzPeCoBRL-ptF9gnGs-tP5-Bdik';
+
+    public function VerifyCaptcha($response)
+    {
+        $url = $this->google_url . "?secret=" . $this->secret . "&response=" . $response;
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 15);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+        $curlData = curl_exec($curl);
+
+        curl_close($curl);
+
+        $res = json_decode($curlData, TRUE);
+        if ($res['success'] == 'true')
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    function ConnectDB()
+    {
+        $dbservername = "localhost";
+        $dbusername = "pollo112";
+        $dbpassword = "wintle1091!";
+        $dbname = "pollo112";
+
+        // Create connection
+        $conn = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } else {
+            return $conn;
+        }
+    }
+
+    function VerifyUsername($conn)
+    {
+        //get input data from form Post style
+        $username = $_POST["username"];
+
+        $sql =  "SELECT count(username) as usernumber from users where username = 'asdawwww'";
+
+        $result = $conn->query($sql);
+        $data = $result->fetch_assoc();
+
+        if ($data['usernumber'] == 0) {
+            return $conn;
+        } else {
+            return false;
+        }
+    }
+
+
+    function RegisterUser($conn)
+    {
+        $username = $_POST["username"];
+        $email_address = $_POST["email_address"];
+        $password = $_POST["password"];
+
+        //set cost (higher number, higher security but slow processing time
+        $cost = 10;
+
+        // Create a random salt
+        $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
+
+        // Prefix information about the hash so PHP knows how to verify it later.
+        // "$2a$" Means we're using the Blowfish algorithm. The following two digits are the cost parameter.
+        $salt = sprintf("$2a$%02d$", $cost) . $salt;
+
+        // Hash the password with the salt
+        $hash = crypt($password, $salt);
+
+        $sql = "INSERT INTO users (username, email_address, password)
+                VALUES ('$username', '$email_address', '$hash')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "<script>alert('Sign up successfully')</script>";
+            header('location : intro.php');
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        $conn->close();
+    }
+
+    function Failed(){
+        $username = $_POST["username"];
+        $email_address = $_POST["email_address"];
+        $password = $_POST["password"];
+        header('location : intro.php#popup1');
+
+        echo"<script>
+            document.getElementById('username').value = '.$username.';
+            document.getElementById('email_address').value = '.$email_address.';
+            document.getElementById('password').value ='.$password.';
+            document.getElementById('repassword').value ='.$password.';
+            </script>";
+        exit;
+    }
+}
+
+$message = 'Google reCaptcha';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $response = $_POST['g-recaptcha-response'];
+
+    if (!empty($response)) {
+        $cap = new Verification();
+        $verified = $cap->VerifyCaptcha($response);
+
+        if ($verified) {
+            $conn = $cap->VerifyUsername($cap->ConnectDB());
+            if ($conn != false) {
+                $cap->RegisterUser($conn);
+            } else {
+                echo "<script>alert('Your username already exists')</script>";
+                return false;
+            }
+        } else {
+            $message = "Please reenter captcha";
+        }
+    }
+}
+
+?>
+
