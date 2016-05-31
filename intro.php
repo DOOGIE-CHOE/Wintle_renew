@@ -105,6 +105,7 @@
                 return false;
             }
 
+
             return true;
         }
     </script>
@@ -417,24 +418,24 @@
                     <span><img src="img/username.png"></span><span name="wrong" id="username_wrong"
                                                                    style="display: none"
                                                                    onclick="document.getElementById('username').value =''"><img
-                            src="img/x.png"></span><input type="text" name = "username" id="username" required
+                            src="img/x.png"></span><input type="text" name="username" id="username" required
                                                           placeholder="User name" autocomplete="off">
 
                     <span><img src="img/email.png"></span><span name="wrong" id="email_wrong" style="display: none"
                                                                 onclick="document.getElementById('email_address').value =''"><img
-                            src="img/x.png"></span><input type="text" name = "email_address "id="email_address" required
+                            src="img/x.png"></span><input type="text" name="email_address" id="email_address" required
                                                           placeholder="Your email address" autocomplete="off">
 
                     <span><img src="img/password.png"></span><span name="wrong" id="password_wrong"
                                                                    style="display: none"
                                                                    onclick="document.getElementById('password').value =''"><img
-                            src="img/x.png"></span><input type="password" name = "password" id="password" required
-                                                              placeholder="Enter a password" autocomplete="off">
+                            src="img/x.png"></span><input type="password" name="password" id="password" required
+                                                          placeholder="Enter a password" autocomplete="off">
 
                     <span><img src="img/password.png"></span><span name="wrong" id="repassword_wrong"
                                                                    style="display: none"
                                                                    onclick="document.getElementById('repassword').value =''"><img
-                            src="img/x.png"></span><input type="password" name ="repassword" id="repassword" required
+                            src="img/x.png"></span><input type="password" name="repassword" id="repassword" required
                                                           placeholder="Re-enter a password"
                                                           autocomplete="off">
 
@@ -456,34 +457,16 @@
 <?php
 
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $username = $_POST["username"];
-$email_address = $_POST["email_address"];
-$password = $_POST["password"];
-
-echo "<script>alert('.$username.')</script>";
-
-
-    echo"<script>
-            document.getElementById('username').value = '.$username.';
-            document.getElementById('email_address').value ='test';
-            document.getElementById('password').value ='test';
-            document.getElementById('repassword').value ='test' ;
-            </script>";
-
-    exit;
-}
-
 class Verification
 {
     /* Google recaptcha API url */
     private $google_url = "https://www.google.com/recaptcha/api/siteverify";
     private $secret = '6LcZwyATAAAAAFzPeCoBRL-ptF9gnGs-tP5-Bdik';
+    private $conn;
 
     public function VerifyCaptcha($response)
     {
         $url = $this->google_url . "?secret=" . $this->secret . "&response=" . $response;
-
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
@@ -509,34 +492,59 @@ class Verification
         $dbname = "pollo112";
 
         // Create connection
-        $conn = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
+        $this->conn = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
         // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+        if ($this->conn->connect_error) {
+            // die("Connection failed: " . $conn->connect_error);
+            $this->conn->close();
+            throw new Exception ("Something went wrong.. :( Please, try it later");
         } else {
-            return $conn;
+            return true;
         }
     }
 
-    function VerifyUsername($conn)
+    function VerifyUsername()
     {
         //get input data from form Post style
         $username = $_POST["username"];
 
-        $sql =  "SELECT count(username) as usernumber from users where username = 'asdawwww'";
 
-        $result = $conn->query($sql);
+        $sql = "SELECT count(username) as usernumber from users where username = '$username'";
+
+        $result = $this->conn->query($sql);
+
         $data = $result->fetch_assoc();
 
+
         if ($data['usernumber'] == 0) {
-            return $conn;
+            return true;
         } else {
-            return false;
+            $this->conn->close();
+            throw new Exception("username already exists. please use other username");
         }
     }
 
+    function VerifyEmail()
+    {
+        //get input data from form Post style
+        $email_address = $_POST["email_address"];
 
-    function RegisterUser($conn)
+
+        $sql = "SELECT count(email_address) as emailnumber from users where email_address = '$email_address'";
+
+        $result = $this->conn->query($sql);
+
+        $data = $result->fetch_assoc();
+
+        if ($data['emailnumber'] == 0) {
+            return true;
+        } else {
+            $this->conn->close();
+            throw new Exception("Email address already exists. please use other Email");
+        }
+    }
+
+    function RegisterUser()
     {
         $username = $_POST["username"];
         $email_address = $_POST["email_address"];
@@ -558,53 +566,69 @@ class Verification
         $sql = "INSERT INTO users (username, email_address, password)
                 VALUES ('$username', '$email_address', '$hash')";
 
-        if ($conn->query($sql) === TRUE) {
+        if ($this->conn->query($sql) === TRUE) {
             echo "<script>alert('Sign up successfully')</script>";
-            header('location : intro.php');
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            //echo "Error: " . $sql . "<br>" . $conn->error;
+            $this->conn->close();
+            throw new Exception("Failed to sign up,.. :( Please, try it later");
         }
-        $conn->close();
-    }
-
-    function Failed(){
-        $username = $_POST["username"];
-        $email_address = $_POST["email_address"];
-        $password = $_POST["password"];
-        header('location : intro.php#popup1');
-
-        echo"<script>
-            document.getElementById('username').value = '.$username.';
-            document.getElementById('email_address').value = '.$email_address.';
-            document.getElementById('password').value ='.$password.';
-            document.getElementById('repassword').value ='.$password.';
-            </script>";
-        exit;
+        $this->conn->close();
     }
 }
 
-$message = 'Google reCaptcha';
+function Failed($message)
+{
+    echo "<script>alert('$message')</script>";
 
+    $username = $_POST["username"];
+    $email_address = $_POST["email_address"];
+    $password = $_POST["password"];
+
+    //header("Location : intro.php#popup1");
+
+    echo "<script>
+            document.getElementById('username').value = '$username';
+            document.getElementById('email_address').value = '$email_address';
+            document.getElementById('password').value ='$password';
+            document.getElementById('repassword').value ='$password';
+            </script>";
+
+    exit;
+}
+
+//starts from here when submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $response = $_POST['g-recaptcha-response'];
+    try {
+        //check reCAPTCHA verification
+        if (!empty($response)) {
+            $cap = new Verification();
+            $verified = $cap->VerifyCaptcha($response);
 
-    if (!empty($response)) {
-        $cap = new Verification();
-        $verified = $cap->VerifyCaptcha($response);
-
-        if ($verified) {
-            $conn = $cap->VerifyUsername($cap->ConnectDB());
-            if ($conn != false) {
-                $cap->RegisterUser($conn);
+            //if reCAPTCHA is verified
+            if ($verified) {
+                if ($cap->ConnectDB()) {
+                    if ($cap->VerifyUsername()) {
+                        if ($cap->VerifyEmail()) {
+                            $cap->RegisterUser();
+                            echo "<script>window.location='intro.php'</script>";
+                            /* 2015 06 01 by Daniel
+                             * i used script at the middle of php because
+                             * php header('Lcation : intro.php') is not working.
+                             * and i don't think it's a good idea to use script here.
+                             * if someone knows why, please fix it.
+                             * */
+                            exit;
+                        }
+                    }
+                }
             } else {
-                echo "<script>alert('Your username already exists')</script>";
-                return false;
+                throw new Exception("Our system recognized you as a robot.");
             }
-        } else {
-            $message = "Please reenter captcha";
         }
+    } catch (Exception $e) {
+        Failed($e->getMessage());
     }
 }
-
 ?>
-
