@@ -14,9 +14,9 @@ session_destroy();
 
 if(!empty($old_user)){
     echo '<script>alert("Logged out")</script>';
-    echo "<script>window.location='intro.php'</script>";
+    echo "<script>window.location='index.php'</script>";
 }else{
     echo '<script>alert("Wrong access !!")</script>';
-    echo "<script>window.location='intro.php'</script>";
+    echo "<script>window.location='index.php'</script>";
 }
 ?>

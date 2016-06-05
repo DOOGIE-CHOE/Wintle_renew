@@ -168,7 +168,7 @@ function Failed($message)
     $email_address = $_POST["email_address"];
     $password = $_POST["password"];
 
-    //header("Location : intro.php#popup1");
+    //header("Location : index.php#popup1");
 
     echo "<script>
             document.getElementById('username').value = '$username';

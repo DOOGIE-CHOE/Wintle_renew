@@ -4,7 +4,7 @@ session_start();
 
 if(isset($_SESSION['valid_user'])){
     echo '<script> alert("Wrong access !!")</script>';
-    echo "<script>window.location='intro.php'</script>";
+    echo "<script>window.location='index.php'</script>";
 }
 ?>
 
@@ -166,7 +166,7 @@ if(isset($_SESSION['valid_user'])){
 <form action="" method = "post">
 <div class="main">
     <div class="header">
-        <a href="intro.php"><img src="img/small_logo_black.png"></a>
+        <a href="index.php"><img src="img/small_logo_black.png"></a>
     </div>
     <div>
         <p id="sigInTitle"> Sign In for Wintle </p>
@@ -202,10 +202,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['valid_user'] = $db->GetUsernameByEmail($_POST['email_address']);
                     $db->DisconnectDB();
                     echo "<script>alert('Signed in successfully')</script>";
-                    echo "<script>window.location='intro.php'</script>";
+                    echo "<script>window.location='index.php'</script>";
                     /* 2015 06 05 by Daniel
                      * i used script at the middle of php because
-                     * php header('Lcation : intro.php') is not working.
+                     * php header('Location : index.php') is not working.
                      * and i don't think it's a good idea to use script here.
                      * if someone knows why, please fix it.
                      * */

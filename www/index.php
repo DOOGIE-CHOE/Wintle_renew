@@ -359,7 +359,7 @@ if(isset($_SESSION['valid_user'])){
 <header>
     <div class="contaner">
 			<span class="company">
-				<a href="intro.php">
+				<a href="index.php">
 					<img id="headerlogo" src="img/logo_s.png" alt="company_logo" title="홈으로 가기"/>
 				</a>
 			</span>
@@ -519,10 +519,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if ($db->VerifyUsername()) {
                         if ($db->VerifyEmail()) {
                             $db->RegisterUser();
-                            echo "<script>window.location='intro.php'</script>";
+                            echo "<script>window.location='index.php'</script>";
                             /* 2015 06 01 by Daniel
                              * i used script at the middle of php because
-                             * php header('Lcation : intro.php') is not working.
+                             * php header('Lcation : index.php') is not working.
                              * and i don't think it's a good idea to use script here.
                              * if someone knows why, please fix it.
                              * */
