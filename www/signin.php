@@ -1,3 +1,13 @@
+<?php
+include_once 'function.php';
+session_start();
+
+if(isset($_SESSION['valid_user'])){
+    echo '<script> alert("Wrong access !!")</script>';
+    echo "<script>window.location='intro.php'</script>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,21 +142,38 @@
         }
 
     </style>
+
+    <script>
+        function isValidEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
+        function check(){
+            var email = document.getElementById("email_address");
+            if(!isValidEmail(email.value)){
+                alert("Check your email address");
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
 </head>
 <body>
-<!--<div>
-    <iframe src="header.html" width="100%" frameBorder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
-</div>-->
+
+<form action="" method = "post">
 <div class="main">
     <div class="header">
-        <a href="intro.php"><img src="img/logo_black.png"></a>
+        <a href="intro.php"><img src="img/small_logo_black.png"></a>
     </div>
     <div>
         <p id="sigInTitle"> Sign In for Wintle </p>
     </div>
     <div class="backboard">
         <div class="SignUp">
-            <span><img src="img/email.png"></span><input type="text" name="email" id="email" required placeholder="Email address" autocomplete="off">
+            <span><img src="img/email.png"></span><input type="text" name="email_address" id="email_address" required placeholder="Email address" autocomplete="off">
 
             <span><img src="img/password.png"></span><input type="password" name="password" id="password" required placeholder="Create a password" autocomplete="off">
 
@@ -160,5 +187,39 @@
         </div>
     </div>
 </div>
+
+</form>
 </body>
 </html>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $db = new DatabaseHandler();
+    try {
+        if ($db->ConnectDB()) {
+            if($db->CheckId()){
+                if($db->CheckPassword()){
+                    $_SESSION['valid_user'] = $db->GetUsernameByEmail($_POST['email_address']);
+                    $db->DisconnectDB();
+                    echo "<script>alert('Signed in successfully')</script>";
+                    echo "<script>window.location='intro.php'</script>";
+                    /* 2015 06 05 by Daniel
+                     * i used script at the middle of php because
+                     * php header('Lcation : intro.php') is not working.
+                     * and i don't think it's a good idea to use script here.
+                     * if someone knows why, please fix it.
+                     * */
+                    exit;
+                }
+            }
+        }
+        $db->DisconnectDB();
+        exit;
+    } catch(Exception $e){
+        Failed($e->getMessage());
+    }
+}
+?>
+
+
+

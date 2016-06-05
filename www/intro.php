@@ -1,5 +1,19 @@
 <?php
-include_once '../pls-config.php';
+include_once 'function.php';
+
+session_start();
+
+$top_fst_text = "Sign In";
+$top_snd_text = "Sign Up";
+$top_fst_link = "signin.php";
+$top_snd_link = "#popup1";
+
+if(isset($_SESSION['valid_user'])){
+    $top_fst_text = $_SESSION['valid_user'];
+    $top_snd_text = "Sign Out";
+    $top_fst_link = "";
+    $top_snd_link = "signout.php";
+}
 ?>
 
 <!DOCTYPE html>
@@ -350,8 +364,8 @@ include_once '../pls-config.php';
 				</a>
 			</span>
 			<span class="login">
-				<a href="signin.php">로그인</a>
-				<a href="#popup1">&nbsp;&nbsp;회원가입</a>
+				<a href="<?php echo $top_fst_link?>" id="top_login"><?php echo $top_fst_text?></a>
+				<a href="<?php echo $top_snd_link?>" id="top_signup">&nbsp;&nbsp;<?php echo $top_snd_text?></a>
 			</span>
     </div>
 </header>
@@ -460,13 +474,11 @@ include_once '../pls-config.php';
 
 <?php
 
-
 class Verification
 {
     /* Google recaptcha API url */
     private $google_url = "https://www.google.com/recaptcha/api/siteverify";
     private $secret = '6LcZwyATAAAAAFzPeCoBRL-ptF9gnGs-tP5-Bdik';
-    private $conn;
 
     public function VerifyCaptcha($response)
     {
@@ -488,116 +500,11 @@ class Verification
             return FALSE;
     }
 
-    function ConnectDB()
-    {
-        // Create connection
-        $this->conn = new mysqli(DBSERVERNAME, DBUSERNAME, DBPASSWORD, DBNAME);
-        // Check connection
-        if ($this->conn->connect_error) {
-            // die("Connection failed: " . $conn->connect_error);
-            $this->conn->close();
-            throw new Exception ("Something went wrong.. :( Please, try it later");
-        } else {
-            return true;
-        }
-    }
 
-    function VerifyUsername()
-    {
-        //get input data from form Post style
-        $username = $_POST["username"];
-
-
-        $sql = "SELECT count(username) as usernumber from users where username = '$username'";
-
-        $result = $this->conn->query($sql);
-
-        $data = $result->fetch_assoc();
-
-
-        if ($data['usernumber'] == 0) {
-            return true;
-        } else {
-            $this->conn->close();
-            throw new Exception("username already exists. please use other username");
-        }
-    }
-
-    function VerifyEmail()
-    {
-        //get input data from form Post style
-        $email_address = $_POST["email_address"];
-
-
-        $sql = "SELECT count(email_address) as emailnumber from users where email_address = '$email_address'";
-
-        $result = $this->conn->query($sql);
-
-        $data = $result->fetch_assoc();
-
-        if ($data['emailnumber'] == 0) {
-            return true;
-        } else {
-            $this->conn->close();
-            throw new Exception("Email address already exists. please use other Email");
-        }
-    }
-
-    function RegisterUser()
-    {
-        $username = $_POST["username"];
-        $email_address = $_POST["email_address"];
-        $password = $_POST["password"];
-
-        //set cost (higher number, higher security but slow processing time
-        $cost = 10;
-
-        // Create a random salt
-        $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
-
-        // Prefix information about the hash so PHP knows how to verify it later.
-        // "$2a$" Means we're using the Blowfish algorithm. The following two digits are the cost parameter.
-        $salt = sprintf("$2a$%02d$", $cost) . $salt;
-
-        // Hash the password with the salt
-        $hash = crypt($password, $salt);
-
-        $sql = "INSERT INTO users (username, email_address, password)
-                VALUES ('$username', '$email_address', '$hash')";
-
-        if ($this->conn->query($sql) === TRUE) {
-            echo "<script>alert('Sign up successfully')</script>";
-        } else {
-            //echo "Error: " . $sql . "<br>" . $conn->error;
-            $this->conn->close();
-            throw new Exception("Failed to sign up,.. :( Please, try it later");
-        }
-        $this->conn->close();
-    }
 }
-
-function Failed($message)
-{
-    echo "<script>alert('$message')</script>";
-
-    $username = $_POST["username"];
-    $email_address = $_POST["email_address"];
-    $password = $_POST["password"];
-
-    //header("Location : intro.php#popup1");
-
-    echo "<script>
-            document.getElementById('username').value = '$username';
-            document.getElementById('email_address').value = '$email_address';
-            document.getElementById('password').value ='$password';
-            document.getElementById('repassword').value ='$password';
-            </script>";
-
-    exit;
-}
-
 //starts from here when submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     $response = $_POST['g-recaptcha-response'];
     try {
         //check reCAPTCHA verification
@@ -607,10 +514,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             //if reCAPTCHA is verified
             if ($verified) {
-                if ($cap->ConnectDB()) {
-                    if ($cap->VerifyUsername()) {
-                        if ($cap->VerifyEmail()) {
-                            $cap->RegisterUser();
+                $db = new DatabaseHandler();
+                if ($db->ConnectDB()) {
+                    if ($db->VerifyUsername()) {
+                        if ($db->VerifyEmail()) {
+                            $db->RegisterUser();
                             echo "<script>window.location='intro.php'</script>";
                             /* 2015 06 01 by Daniel
                              * i used script at the middle of php because
