@@ -5,3 +5,7 @@ email_addres varchar(20) primary key,
 password varchar(70) not null,
 created_date timestamp default current_timestamp);
 
+create table profilephoto(
+email_address varchar(20) primary key,
+image varchar(255) not null,
+upload_date timestamp default current_timestamp);

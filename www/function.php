@@ -158,6 +158,17 @@ class DatabaseHandler
             throw new Exception("Failed to sign up,.. :( Please, try it later");
         }
     }
+
+    function UploadProfilePhoto($email_address, $image){
+        $sql = "INSERT INTO profilephoto(email_address, image)
+                VALUES ('$email_address','$image')";
+
+        if ($this->conn->query($sql) === TRUE) {
+
+        } else {
+            throw new Exception("Failed to upload profile photo.. :( Please, try it later");
+        }
+    }
 }
 
 function Failed($message)
