@@ -12,7 +12,7 @@ $top_snd_link = "#popup1";
 if(isset($_SESSION['valid_user'])){
     $top_fst_text = $_SESSION['valid_user'];
     $top_snd_text = "Sign Out";
-    $top_fst_link = "";
+    $top_fst_link = "mypage.php";
     $top_snd_link = "signout.php";
 }
 
@@ -399,7 +399,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } catch (Exception $e) {
         $db->DisconnectDB();
-        Failed($e->getMessage());
+        FailedOnSignUp($e->getMessage());
     }
 }
 ?>

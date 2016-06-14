@@ -55,21 +55,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $file_tmp = $_FILES['image']['tmp_name'];
     $folder = "ProfileImages/";
 
+    //get extension
     $ext = pathinfo($file_name, PATHINFO_EXTENSION);
 
-    $filepath = $folder.$GLOBALS['email_address'].'.'.$ext;
-    echo "$filepath";
+    //get random number and date
+    $time = getdate();
+    $ran = rand(1000,9999);
 
-    move_uploaded_file($file_tmp, $filepath);
+   /* $base = new Imagick('original.jpg');
+    $mask = new Imagick('mask.png');
+
+    $base->compositeImage($mask, Imagick::COMPOSITE_COPYOPACITY, 0, 0);
+    $base->writeImage('result.png');*/
+
+    $refilename = $time['year'].$time['mon'].$time['mday'].$time['hours'].$time['minutes'].$time['seconds'].$ran.'.'.$ext;
+    $filepath = $folder.$refilename;
+
     try{
         $db = new DatabaseHandler();
         if($db->ConnectDB()){
-            $db->UploadProfilePhoto($_SESSION['valid_user'], $filepath);
+            if($db->isPhotoExists($_SESSION['email_address'])){
+                $db->DeleteProfilePhoto($_SESSION['email_address']);
+            }
+            move_uploaded_file($file_tmp, $filepath);
+            $db->UploadProfilePhoto($_SESSION['email_address'], $filepath);
             $db->DisconnectDB();
         }
     }catch(Exception $e){
-//        echo $e;
-        //Failed($e);
+        $db->DisconnectDB();
+        Failed($e->getMessage());
     }
 }
 ?>

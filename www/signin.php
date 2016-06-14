@@ -199,8 +199,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($db->ConnectDB()) {
             if($db->CheckId()){
                 if($db->CheckPassword()){
+                    $_SESSION['email_address'] = $_POST['email_address'];
+
                     $_SESSION['valid_user'] = $db->GetUsernameByEmail($_POST['email_address']);
-                    $GLOBALS['email_address'] = $_POST['email_address'];
+
                     $db->DisconnectDB();
                     echo "<script>alert('Signed in successfully')</script>";
                     echo "<script>window.location='index.php'</script>";

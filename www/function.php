@@ -159,6 +159,43 @@ class DatabaseHandler
         }
     }
 
+    function isPhotoExists($email_address){
+
+        $sql = "SELECT count(email_address) as emailnumber from profilephoto where email_address = '$email_address'";
+
+        $result = $this->conn->query($sql);
+
+        $data = $result->fetch_assoc();
+
+        if ($data['emailnumber'] >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function DeleteProfilePhoto($email_address){
+
+        $sql = "SELECT image  from profilephoto where email_address = '$email_address'";
+
+        $result = $this->conn->query($sql);
+
+        $data = $result->fetch_assoc();
+
+        $tmp = $data['image'];
+
+        if(file_exists($tmp)){
+            if(unlink($tmp)){
+                $sql = "DELETE from profilephoto where email_address = '$email_address'";
+                if($this->conn->query($sql)){
+                    return true;
+                }
+                else
+                    throw new Exception("Error occurs during deleting existing profile photo");
+            }
+        }
+    }
+
     function UploadProfilePhoto($email_address, $image){
         $sql = "INSERT INTO profilephoto(email_address, image)
                 VALUES ('$email_address','$image')";
@@ -171,7 +208,12 @@ class DatabaseHandler
     }
 }
 
-function Failed($message)
+function Failed($message){
+    echo "<script>alert('$message')</script>";
+    exit;
+}
+
+function FailedOnSignUp($message)
 {
     echo "<script>alert('$message')</script>";
 
