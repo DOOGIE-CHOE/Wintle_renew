@@ -201,6 +201,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if($db->CheckPassword()){
                     $_SESSION['email_address'] = $_POST['email_address'];
 
+                    $_SESSION['loggedIn'] = true;
+
                     $_SESSION['valid_user'] = $db->GetUsernameByEmail($_POST['email_address']);
 
                     $db->DisconnectDB();

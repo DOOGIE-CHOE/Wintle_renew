@@ -7,12 +7,10 @@ include_once '../pls-config.php';
  * Date: 6/5/2016
  * Time: 7:46 PM
  */
-class DatabaseHandler
-{
+class DatabaseHandler {
     private $conn;
 
-    function ConnectDB()
-    {
+    function ConnectDB() {
         // Create connection
         $this->conn = new mysqli(DBSERVERNAME, DBUSERNAME, DBPASSWORD, DBNAME);
         // Check connection
@@ -23,15 +21,14 @@ class DatabaseHandler
             return true;
         }
     }
-    
-    function DisconnectDB(){
-        if(!empty($this->conn)){
+
+    function DisconnectDB() {
+        if (!empty($this->conn)) {
             $this->conn->close();
         }
     }
 
-    function CheckId()
-    {
+    function CheckId() {
         //get input data from form Post style
         $email_address = $_POST["email_address"];
 
@@ -49,8 +46,7 @@ class DatabaseHandler
 
     }
 
-    function CheckPassword()
-    {
+    function CheckPassword() {
         $email_address = $_POST["email_address"];
         $password = $_POST["password"];
 
@@ -69,7 +65,7 @@ class DatabaseHandler
         throw new Exception("Username or password is wrong. Please, check it again");
     }
 
-    function GetUsernameByEmail($email_address){
+    function GetUsernameByEmail($email_address) {
 
         $sql = "SELECT username from users where email_address = '$email_address'";
 
@@ -77,13 +73,12 @@ class DatabaseHandler
 
         $data = $result->fetch_assoc();
 
-        if($data['username'] != null){
+        if ($data['username'] != null) {
             return $data['username'];
         }
     }
 
-    function VerifyUsername()
-    {
+    function VerifyUsername() {
         //get input data from form Post style
         $username = $_POST["username"];
 
@@ -100,8 +95,7 @@ class DatabaseHandler
         }
     }
 
-    function VerifyEmail()
-    {
+    function VerifyEmail() {
         //get input data from form Post style
         $email_address = $_POST["email_address"];
 
@@ -119,8 +113,7 @@ class DatabaseHandler
         }
     }
 
-    function GetHashCode($password, $salt = false)
-    {
+    function GetHashCode($password, $salt = false) {
         //set cost (higher number, higher security but slow processing time
         $cost = 10;
 
@@ -140,8 +133,7 @@ class DatabaseHandler
         return $hash;
     }
 
-    function RegisterUser()
-    {
+    function RegisterUser() {
         $username = $_POST["username"];
         $email_address = $_POST["email_address"];
         $password = $_POST["password"];
@@ -159,7 +151,7 @@ class DatabaseHandler
         }
     }
 
-    function isPhotoExists($email_address){
+    function isPhotoExists($email_address) {
 
         $sql = "SELECT count(email_address) as emailnumber from profilephoto where email_address = '$email_address'";
 
@@ -174,7 +166,7 @@ class DatabaseHandler
         }
     }
 
-    function GetProfilePhoto($email_address){
+    function GetProfilePhoto($email_address) {
 
         $sql = "SELECT image  from profilephoto where email_address = '$email_address'";
 
@@ -187,7 +179,7 @@ class DatabaseHandler
         return $tmp;
     }
 
-    function DeleteProfilePhoto($email_address){
+    function DeleteProfilePhoto($email_address) {
 
         $sql = "SELECT image  from profilephoto where email_address = '$email_address'";
 
@@ -197,19 +189,18 @@ class DatabaseHandler
 
         $tmp = $data['image'];
 
-        if(file_exists($tmp)){
-            if(unlink($tmp)){
+        if (file_exists($tmp)) {
+            if (unlink($tmp)) {
                 $sql = "DELETE from profilephoto where email_address = '$email_address'";
-                if($this->conn->query($sql)){
+                if ($this->conn->query($sql)) {
                     return true;
-                }
-                else
+                } else
                     throw new Exception("Error occurs during deleting existing profile photo");
             }
         }
     }
 
-    function UploadProfilePhoto($email_address, $image){
+    function UploadProfilePhoto($email_address, $image) {
         $sql = "INSERT INTO profilephoto(email_address, image)
                 VALUES ('$email_address','$image')";
 
@@ -221,13 +212,12 @@ class DatabaseHandler
     }
 }
 
-function Failed($message){
+function Failed($message) {
     echo "<script>alert('$message')</script>";
     exit;
 }
 
-function FailedOnSignUp($message)
-{
+function FailedOnSignUp($message) {
     echo "<script>alert('$message')</script>";
 
     $username = $_POST["username"];

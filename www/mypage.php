@@ -1,6 +1,15 @@
 <?php
 include_once 'function.php';
 session_start();
+
+if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
+
+} else{
+    echo "<script>alert('Please Sign in first')</script>";
+    echo "<script>window.location='signin.php';</script>";
+    exit;
+}
+
 ?>
 <html>
 <head>
@@ -55,8 +64,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $file_tmp = $_FILES['image']['tmp_name'];
     $folder = "ProfileImages/";
 
+    $count = 0;
     //get extension
     $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+    foreach($permitted as $extension){
+        if($extension == $ext)
+            $count++;
+    }
+
+    if($count != 1){
+        echo "<script>alert('You can only upload image file.')</script>";
+        echo "<script>window.location='mypage.php';</script>";
+        exit;
+    }
 
     //get random number and date
     $time = getdate();
@@ -125,6 +145,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $username = $_SESSION['valid_user'];
                 echo $username
                 ?>
+
+                <textarea id="textarea" rows="5" cols="40"></textarea>
+                <input type="button" value="Add">
+
             </div>
         </div>
     </div>
