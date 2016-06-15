@@ -9,3 +9,10 @@ create table profilephoto(
 email_address varchar(20) primary key,
 image varchar(255) not null,
 upload_date timestamp default current_timestamp);
+
+create table userhashtags(
+email_address varchar(20) primary key,
+hashtag varchar(30) not null,
+constraint chk_hash check (substr(hashtag,1,1) = '#')); 
+// check constraint is not working on my sql.
+// use trigger alternatively or check data by javascript or php before insert it.
