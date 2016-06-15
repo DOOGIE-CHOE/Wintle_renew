@@ -174,6 +174,19 @@ class DatabaseHandler
         }
     }
 
+    function GetProfilePhoto($email_address){
+
+        $sql = "SELECT image  from profilephoto where email_address = '$email_address'";
+
+        $result = $this->conn->query($sql);
+
+        $data = $result->fetch_assoc();
+
+        $tmp = $data['image'];
+
+        return $tmp;
+    }
+
     function DeleteProfilePhoto($email_address){
 
         $sql = "SELECT image  from profilephoto where email_address = '$email_address'";

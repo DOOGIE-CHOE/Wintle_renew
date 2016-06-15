@@ -32,7 +32,7 @@ session_start();
             padding-left: 5px;
             padding-right: 5px;
         }
-       /* hide input file button*/
+        /* hide input file button*/
         .image-upload > input
         {
             display: none;
@@ -62,11 +62,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $time = getdate();
     $ran = rand(1000,9999);
 
-   /* $base = new Imagick('original.jpg');
-    $mask = new Imagick('mask.png');
+    /* $base = new Imagick('original.jpg');
+     $mask = new Imagick('mask.png');
 
-    $base->compositeImage($mask, Imagick::COMPOSITE_COPYOPACITY, 0, 0);
-    $base->writeImage('result.png');*/
+     $base->compositeImage($mask, Imagick::COMPOSITE_COPYOPACITY, 0, 0);
+     $base->writeImage('result.png');*/
 
     $refilename = $time['year'].$time['mon'].$time['mday'].$time['hours'].$time['minutes'].$time['seconds'].$ran.'.'.$ext;
     $filepath = $folder.$refilename;
@@ -74,9 +74,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     try{
         $db = new DatabaseHandler();
         if($db->ConnectDB()){
+            //if the photo's existing, delete it
             if($db->isPhotoExists($_SESSION['email_address'])){
                 $db->DeleteProfilePhoto($_SESSION['email_address']);
             }
+            //file upload
             move_uploaded_file($file_tmp, $filepath);
             $db->UploadProfilePhoto($_SESSION['email_address'], $filepath);
             $db->DisconnectDB();
@@ -93,16 +95,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="Row">
             <div class="Cell">
                 <form action = "" method = "POST" enctype="multipart/form-data">
-                <div class="image-upload">
-                    <label for="file-input">
-                        <img src="img/defaultprofile.png"/>
-                    </label>
-                    <input id="file-input" type="file"  name="image"  onchange="this.form.submit()"/>
-                </div>
+                    <div class="image-upload">
+                        <label for="file-input">
+                            <?php
+                            $path =  "img/defaultprofile.png"; //set default image
+                            try{
+                                $db = new DatabaseHandler();
+                                if($db->ConnectDB()){
+                                    if($db->isPhotoExists($_SESSION['email_address'])){
+                                        //if profile photo's found, set path as it's
+                                        $path = $db->GetProfilePhoto($_SESSION['email_address']);
+                                    }
+                                }
+                                $db->DisconnectDB();
+                            }catch(Exception $e){
+                                $db->DisconnectDB();
+                                Failed($e->getMessage());
+                            }
+                            //display it
+                            echo "<img src='$path'/>";
+                            ?>
+                        </label>
+                        <input id="file-input" type="file"  name="image"  onchange="this.form.submit()"/>
+                    </div>
                 </form>
             </div>
             <div class="Cell">
-                dddddddddddddddddddddddddd
+                <?php
+                $username = $_SESSION['valid_user'];
+                echo $username
+                ?>
             </div>
         </div>
     </div>
