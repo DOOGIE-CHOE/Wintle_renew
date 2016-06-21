@@ -6,6 +6,8 @@ if(isset($_SESSION['valid_user'])){
     echo '<script> alert("Wrong access !!")</script>';
     echo "<script>window.location='index.php'</script>";
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -206,7 +208,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['valid_user'] = $db->GetUsernameByEmail($_POST['email_address']);
 
                     $db->DisconnectDB();
-                    echo "<script>alert('Signed in successfully')</script>";
                     echo "<script>window.location='index.php'</script>";
                     /* 2015 06 05 by Daniel
                      * i used script at the middle of php because

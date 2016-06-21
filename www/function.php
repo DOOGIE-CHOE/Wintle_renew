@@ -1,6 +1,7 @@
 <?php
 include_once '../pls-config.php';
 
+
 /**
  * Created by PhpStorm.
  * User: Daniel
@@ -28,7 +29,15 @@ class DatabaseHandler {
         }
     }
 
-    function CheckId() {
+    function Select($sql){
+        $result = $this->conn->query($sql);
+
+        $data = $result->fetch_assoc();
+
+        return $data;
+    }
+
+    function CheckId(){
         //get input data from form Post style
         $email_address = $_POST["email_address"];
 
@@ -209,6 +218,23 @@ class DatabaseHandler {
         } else {
             throw new Exception("Failed to upload profile photo.. :( Please, try it later");
         }
+    }
+
+    function GetHashTags($email_address){
+
+        $sql = "SELECT hashtag  from userhashtags where email_address = '$email_address'";
+
+        $result = $this->conn->query($sql);
+        if($result->num_rows <= 0) {
+            return null;
+        }
+        else{
+            while ($data = $result->fetch_assoc())
+            {
+                $statistic[] = $data['hashtag'];
+            }
+        }
+        return $statistic;
     }
 }
 

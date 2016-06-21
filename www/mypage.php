@@ -16,6 +16,27 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="javascript.fullPage.css"/>
     <link rel="stylesheet" href="css/style.css">
+    <script>
+        <?php echo "asdads"?>
+
+        function hash(){
+            var textarea = document.getElementById("displayhash");
+            var submithash = document.getElementById("submithash");
+
+            if(submithash.value == "Add"){
+                textarea.style.display = '';
+                submithash.value = "Submit";
+            }
+            else if(submithash.value == "Submit"){
+                textarea.style.display = 'none';
+                submithash.value = "Add";
+            }
+
+        }
+
+
+
+    </script>
 
     <style>
         #section {
@@ -143,11 +164,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="Cell">
                 <?php
                 $username = $_SESSION['valid_user'];
-                echo $username
-                ?>
+                echo $username;
 
-                <textarea id="textarea" rows="5" cols="40"></textarea>
-                <input type="button" value="Add">
+
+                try{
+                    $db = new DatabaseHandler();
+                    if($db->ConnectDB()){
+                        $list = $db->GetHashTags($_SESSION['email_address']);
+
+                        foreach($list as $hash){
+                            echo $hash;
+                            echo "&nbsp;";
+                        }
+                    }
+                }catch(Exception $e){
+
+                }
+                ?>
+                <textarea id="displayhash" rows="5" cols="40" style="display: none"></textarea>
+                <input type="button" id="submithash" value="Add" onclick="hash()">
 
             </div>
         </div>

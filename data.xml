@@ -1,0 +1,10 @@
+<data>
+    <select>
+        <isPhotoExists>
+            "SELECT count(email_address) as emailnumber from profilephoto where email_address = '$email_address'";
+        </isPhotoExists>
+        <CheckId>
+            SELECT count(email_address) as emailnumber from users where email_address = '%s'
+        </CheckId>
+    </select>
+</data>
