@@ -5,8 +5,10 @@
  * Date: 6/1/2016
  * Time: 4:30 PM
  */
+/*
 $testvar = 1;
 $xml_string = file_get_contents('C:\Users\Daniel\Documents\GitHub\Wintle_renew\data.xml');
+$xml = simplexml_load_string($xml_string);*/
 
 define("DBSERVERNAME", "localhost");     // The host you want to connect to.
 define("DBUSERNAME", "pollo112");    // The database username.
