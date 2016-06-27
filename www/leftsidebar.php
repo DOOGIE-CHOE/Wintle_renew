@@ -23,7 +23,7 @@
             margin:0;
             padding:0;
         }
-        ul{
+        .alignleft{
             float:left;
             height:100%;
             width:200px;
@@ -47,7 +47,7 @@
 </head>
 
 <body>
-<ul>
+<ul class="alignleft">
     <li><a href="mypage.php">Profile</a></li>
     <li><a href="#">Contents</a></li>
     <li><a href="#">Projects</a></li>

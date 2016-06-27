@@ -21,7 +21,7 @@
             margin:0;
             padding:0;
         }
-        ul{
+        .alginright{
             float:right;
             height:100%;
             list-style :none;
@@ -43,7 +43,7 @@
     </style>
 </head>
 <body>
-<ul>
+<ul class="alginright">
     <li><img src="img/All.png"></li>
     <li><img src="img/Story.png"></li>
     <li><img src="img/Melody.png"></li>
