@@ -55,10 +55,20 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
 <?php include_once 'rightsidebar.php'?>
 <body>
 
-<a href="#popup2">
-    <button>Click me</button>
-</a>
 
+<div>
+    </br>
+    </br>
+    </br>
+
+    <a href="#popup2"><button>Click me</button></a>
+
+<?php
+
+$b = GetContentID("lyrics");
+echo $b;
+?>
+</div>
 <div id="popup2" class="overlay" >
     <form action="" method="post">
         <div class="popup" style="height:600px; width:800px">
@@ -67,9 +77,9 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
             <br><br>
             <div class="backboard" style="height:500px; width:780px">
                 <div class="SignUp">
-                    <input type="text" style="font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Title">
-                    <textarea class="InputContents" rows="10" cols="40" required placeholder="Contents"></textarea>
-                    <input type="text" style=" width : 600px; font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Add HashTags">
+                    <input type="text" id="InputTitle" style="font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Title">
+                    <textarea class="InputContents" id="InputContents" rows="10" cols="40" required placeholder="Contents"></textarea>
+                    <input type="text" id="InputHash" style=" width : 600px; font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Add HashTags">
                     <input type="submit" name="submit" value="Upload" onclick="return check()">
                 </div>
             </div>
@@ -83,6 +93,16 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
 </body>
 </html>
 
+<?php
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+
+
+}
+
+?>
 
 
 

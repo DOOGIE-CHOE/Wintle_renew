@@ -106,16 +106,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     //get random number and date
-    $time = getdate();
-    $ran = rand(1000,9999);
-
-    /* $base = new Imagick('original.jpg');
-     $mask = new Imagick('mask.png');
-
-     $base->compositeImage($mask, Imagick::COMPOSITE_COPYOPACITY, 0, 0);
-     $base->writeImage('result.png');*/
-
-    $refilename = $time['year'].$time['mon'].$time['mday'].$time['hours'].$time['minutes'].$time['seconds'].$ran.'.'.$ext;
+    $refilename = GetContentID("image");
+    $refilename .= '.'.$ext;
     $filepath = $folder.$refilename;
 
     try{

@@ -236,6 +236,27 @@ class DatabaseHandler {
         }
         return $statistic;
     }
+
+
+
+    function UploadLyrics($email_address){
+
+    }
+
+
+}
+
+function GetContentID($type){
+    $time = getdate();
+    $ran = rand(1000,9999);
+    $contentid = $time['year'].$time['mon'].$time['mday'].$time['hours'].$time['minutes'].$time['seconds'].$ran;
+
+    if($type == "image"){
+        return $contentid;
+    }
+    else if($type == "lyrics"){
+        return "L".$contentid;
+    }
 }
 
 function Failed($message) {
@@ -261,3 +282,4 @@ function FailedOnSignUp($message) {
 
     exit;
 }
+

@@ -7,7 +7,7 @@ created_date timestamp default current_timestamp);
 
 create table profilephoto(
 email_address varchar(20) primary key,
-image varchar(255) not null,
+image varchar(50) not null,
 upload_date timestamp default current_timestamp);
 
 create table userhashtags(
@@ -16,3 +16,30 @@ hashtag varchar(30) not null,
 constraint chk_hash check (substr(hashtag,1,1) = '#')); 
 // check constraint is not working on my sql.
 // use trigger alternatively or check data by javascript or php before insert it.
+
+
+create table mylyrics(
+email_address varchar(20) not null,
+contents_id varchar(30) not null
+);
+
+create table lyrics(
+contents_id varchar(30) primary key,
+title varchar(30) not null,
+contents varchar(1000) not null,
+created_date timestamp default current_timestamp
+);
+
+create table lyricshash(
+contents_id varchar(30) not null,
+hashtag varchar(20) not null
+);
+
+create table lyricslikes(
+contents_id varchar(30) not null,
+likes int not null
+);
+
+create table lyricscomments(
+
+);
