@@ -112,11 +112,11 @@ if(isset($_SESSION['valid_user'])){
 </video>
 <div id="fullpage">
     <div class="section " id="section0">
-       <!-- <div class="content">
+       <div class="content">
             <div class="contaner">
                 <img class="intro" src="./PAGE/main_logo.png"/>
             </div>
-        </div>-->
+        </div>
         <img class="paper_cap" src="./PAGE/Cloud_paper_top.png" alt=""/>
     </div>
     <div class="section" id="section1">

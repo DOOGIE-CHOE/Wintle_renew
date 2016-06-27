@@ -48,7 +48,7 @@
 
 <body>
 <ul>
-    <li><a href="#">Profile</a></li>
+    <li><a href="mypage.php">Profile</a></li>
     <li><a href="#">Contents</a></li>
     <li><a href="#">Projects</a></li>
     <li><a href="#">Incomes</a></li>

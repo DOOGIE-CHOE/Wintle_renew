@@ -16,25 +16,31 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="javascript.fullPage.css"/>
     <link rel="stylesheet" href="css/style.css">
-    <script>
-        <?php echo "asdads"?>
 
+    <script>
         function hash(){
             var textarea = document.getElementById("displayhash");
             var submithash = document.getElementById("submithash");
 
+            <?php
+            $string = " ";
+
+            foreach($_SESSION['hash'] as $item=>$value){
+                $string .= $value;
+            }
+
+            ?>
             if(submithash.value == "Add"){
                 textarea.style.display = '';
+                textarea.value = '<?php  echo $string;?>';
+                alert('<?php echo $string ?>');
                 submithash.value = "Submit";
             }
             else if(submithash.value == "Submit"){
                 textarea.style.display = 'none';
                 submithash.value = "Add";
             }
-
         }
-
-
 
     </script>
 
@@ -166,19 +172,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $username = $_SESSION['valid_user'];
                 echo $username;
 
-
                 try{
                     $db = new DatabaseHandler();
                     if($db->ConnectDB()){
                         $list = $db->GetHashTags($_SESSION['email_address']);
-
+                        $_SESSION['hash'] = $list;
                         foreach($list as $hash){
                             echo $hash;
                             echo "&nbsp;";
                         }
                     }
+                    $db->DisconnectDB();
                 }catch(Exception $e){
-
+                    $db->DisconnectDB();
                 }
                 ?>
                 <textarea id="displayhash" rows="5" cols="40" style="display: none"></textarea>
