@@ -65,7 +65,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
 
 <?php
 
-$b = GetContentID("lyrics");
+$b = CreateContentID("lyrics");
 echo $b;
 ?>
 </div>
@@ -77,10 +77,10 @@ echo $b;
             <br><br>
             <div class="backboard" style="height:500px; width:780px">
                 <div class="SignUp">
-                    <input type="text" id="InputTitle" style="font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Title">
-                    <textarea class="InputContents" id="InputContents" rows="10" cols="40" required placeholder="Contents"></textarea>
-                    <input type="text" id="InputHash" style=" width : 600px; font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Add HashTags">
-                    <input type="submit" name="submit" value="Upload" onclick="return check()">
+                    <input type="text" name="InputTitle" style="font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Title">
+                    <textarea class="InputContents" name="InputContents" rows="10" cols="40" required placeholder="Contents"></textarea>
+                    <input type="text" name="InputHash" style=" width : 600px; font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Add HashTags">
+                    <input type="submit" name="submit" value="Upload">
                 </div>
             </div>
         </div>
@@ -96,9 +96,23 @@ echo $b;
 <?php
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
+try{
+    $db = new DatabaseHandler();
+    if($db->ConnectDB()){
+        $contentid = CreateContentID("lyrics");
+        if($db->RegisterContentID($_SESSION['email_address'],$contentid)){
+            if($db->UploadLyrics($contentid, $_POST['InputTitle'] , $_POST['InputContents'] )){
+                echo "<script>window.location='mycontents.php';</script>";
+            }
+        }
+    }else{
+        $db->DisconnectDB();
+    }
 
-
-
+}catch(Exception $e){
+    $db->DisconnectDB();
+    Failed($e->getMessage());
+}
 
 }
 

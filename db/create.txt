@@ -37,7 +37,7 @@ hashtag varchar(20) not null
 
 create table lyricslikes(
 contents_id varchar(30) not null,
-likes int not null
+likes int default 0
 );
 
 create table lyricscomments(

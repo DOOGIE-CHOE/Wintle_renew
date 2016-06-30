@@ -49,7 +49,7 @@
 <body>
 <ul class="alignleft">
     <li><a href="mypage.php">Profile</a></li>
-    <li><a href="#">Contents</a></li>
+    <li><a href="mycontents.php">Contents</a></li>
     <li><a href="#">Projects</a></li>
     <li><a href="#">Incomes</a></li>
 </ul>

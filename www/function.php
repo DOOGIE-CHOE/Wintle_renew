@@ -237,16 +237,38 @@ class DatabaseHandler {
         return $statistic;
     }
 
+    function RegisterContentID($email_address, $id){
+        $sql = "INSERT INTO mylyrics VALUES('$email_address','$id')";
 
-
-    function UploadLyrics($email_address){
-
+        if($this->conn->query($sql) === TRUE){
+            return true;
+        }else{
+            throw new Exception("Failed to upload lyrics.. :( Please, try it later");
+        }
     }
 
 
+    function UploadLyrics($id, $title, $contents){
+
+        $sql = "INSERT INTO lyrics(contents_id, title, contents)  VALUES('$id','$title','$contents')";
+
+        if($this->conn->query($sql) === TRUE) {
+            $sql = "INSERT INTO lyricslikes(contents_id) VALUES ('$id')";
+            if($this->conn->query($sql) ===TRUE){
+                return true;
+            }else{
+                $sql = "DELETE a, b from lyrics a INNER  join mylyrics b on a.contents_id = b.contents_id where a.contents_id = '$id'";
+                if($this->conn->query($sql) === TRUE){
+                    throw new Exception("Failed to upload lyrics.. :( Please, try it later");
+                }
+            }
+        }else{
+            throw new Exception("Failed to upload lyrics.. :( Please, try it later");
+        }
+    }
 }
 
-function GetContentID($type){
+function CreateContentID($type){
     $time = getdate();
     $ran = rand(1000,9999);
     $contentid = $time['year'].$time['mon'].$time['mday'].$time['hours'].$time['minutes'].$time['seconds'].$ran;
