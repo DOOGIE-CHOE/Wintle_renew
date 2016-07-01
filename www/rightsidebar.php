@@ -12,7 +12,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" type="text/css" href="javascript.fullPage.css"/>
+    <link rel="stylesheet" type="text/css" href="css/javascript.fullPage.css"/>
     <link rel="stylesheet" href="css/style.css">
     <title>All Sources</title>
     <style>

@@ -21,7 +21,7 @@ if(isset($_SESSION['valid_user'])){
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" type="text/css" href="javascript.fullPage.css"/>
+    <link rel="stylesheet" type="text/css" href="css/javascript.fullPage.css"/>
     <link rel="stylesheet" href="css/style.css">
     <title>Wintle</title>
 
@@ -114,10 +114,10 @@ if(isset($_SESSION['valid_user'])){
     <div class="section " id="section0">
        <div class="content">
             <div class="contaner">
-                <img class="intro" src="./PAGE/main_logo.png"/>
+                <img class="intro" src="img/PAGE/main_logo.png"/>
             </div>
         </div>
-        <img class="paper_cap" src="./PAGE/Cloud_paper_top.png" alt=""/>
+        <img class="paper_cap" src="img/PAGE/Cloud_paper_top.png" alt=""/>
     </div>
     <div class="section" id="section1">
         <div class="slide" id="slide1">
@@ -150,7 +150,7 @@ if(isset($_SESSION['valid_user'])){
     </div>
 </div>
 
-<script type="text/javascript" src="javascript.fullPage.js"></script>
+<script type="text/javascript" src="js/javascript.fullPage.js"></script>
 <script type="text/javascript">
     fullpage.initialize('#fullpage', {
         anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],

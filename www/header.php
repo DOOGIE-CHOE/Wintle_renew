@@ -21,7 +21,7 @@ if(isset($_SESSION['valid_user'])){
 <head>
     <script src='https://www.google.com/recaptcha/api.js'></script> <!-- google ReCAPTCHA include-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" type="text/css" href="javascript.fullPage.css"/>
+    <link rel="stylesheet" type="text/css" href="css/javascript.fullPage.css"/>
     <link rel="stylesheet" href="css/style.css">
     <script>
 

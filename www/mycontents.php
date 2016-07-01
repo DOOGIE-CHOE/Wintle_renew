@@ -25,11 +25,43 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" type="text/css" href="javascript.fullPage.css"/>
+    <link rel="stylesheet" type="text/css" href="css/javascript.fullPage.css"/>
     <link rel="stylesheet" href="css/style.css">
 
-    <style>
+    <!-- default theme -->
+    <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
+    <link href="css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 
+<!--
+    flick theme
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+    <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
+-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+
+    <script>
+        //tag-it
+        $(function() {
+            $('#HashTags').tagit({
+                //evert for after putting tags
+                afterTagAdded: function(evt, ui) {
+                    var tags = $('#HashTags').tagit("assignedTags");
+                    //check whether the first charactor is #
+                    if(tags[tags.length-1].charAt(0) != '#'){
+
+                        //put # charactor at first then replace it with without-sharp tag
+                        var tagswithsharp = '#'+tags[tags.length-1];
+                        $('#HashTags').tagit("removeTagByLabel",tags[tags.length-1]);
+                        $("#HashTags").tagit("createTag",tagswithsharp);
+                    }
+            }
+            });
+        });
+    </script>
+
+    <style>
         .InputContents {
             background-color: #fff;
             border-top: 2px solid #2c90c6;
@@ -79,7 +111,7 @@ echo $b;
                 <div class="SignUp">
                     <input type="text" name="InputTitle" style="font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Title">
                     <textarea class="InputContents" name="InputContents" rows="10" cols="40" required placeholder="Contents"></textarea>
-                    <input type="text" name="InputHash" style=" width : 600px; font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Add HashTags">
+                    <input name="tags" id="HashTags" value="" required placeholder="Add hashtags">
                     <input type="submit" name="submit" value="Upload">
                 </div>
             </div>

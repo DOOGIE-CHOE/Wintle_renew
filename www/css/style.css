@@ -200,7 +200,7 @@ header {
 }
 
 .SignUp input[type="text"],
-.SignUp input[type="password"] {
+.SignUp input[type="password"]{
     background-color: #fff;
     border-top: 2px solid #2c90c6;
     border-right: 1px solid #000;
