@@ -1,0 +1,49 @@
+DELIMITER $$
+create procedure UploadLyrics(
+in _email_address varchar(20),
+in _contents_id varchar(30),
+in _title varchar(30),
+in _contents varchar(1000),
+in _tags varchar(300),
+out _result int)
+BEGIN
+	declare err int default '0';
+	declare continue handler for SQLEXCEPTION set err = -1;
+	declare result int default '0';
+
+	start transaction;
+
+	insert into mylyrics(email_address, contents_id) values(_email_address, _contents_id);
+
+	insert into lyrics(contents_id, title, contents) values(_contents_id, _title, _contents);
+
+		
+
+	
+
+do_this:
+  LOOP
+    SET strLen = CHAR_LENGTH(_tags);
+
+    insert into lyricshash(contents_id, hashtag) values (_contents_id,SUBSTRING_INDEX(strIDs, ',', 1));
+
+    SET SubStrLen = CHAR_LENGTH(SUBSTRING_INDEX(strIDs, ',', 1)) + 2;
+    SET strIDs = MID(strIDs, SubStrLen, strLen);
+
+    IF strIDs = '' THEN
+      LEAVE do_this;
+    END IF;
+  END LOOP do_this;
+
+if err<0 then
+	rollback;
+else
+	commit;
+end if;
+
+
+END $$
+
+
+
+DELIMITER;

@@ -111,7 +111,7 @@ echo $b;
                 <div class="SignUp">
                     <input type="text" name="InputTitle" style="font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Title">
                     <textarea class="InputContents" name="InputContents" rows="10" cols="40" required placeholder="Contents"></textarea>
-                    <input name="tags" id="HashTags" value="" required placeholder="Add hashtags">
+                    <input name="tags" id="HashTags" required placeholder="Add hashtags">
                     <input type="submit" name="submit" value="Upload">
                 </div>
             </div>
@@ -134,6 +134,8 @@ try{
         $contentid = CreateContentID("lyrics");
         if($db->RegisterContentID($_SESSION['email_address'],$contentid)){
             if($db->UploadLyrics($contentid, $_POST['InputTitle'] , $_POST['InputContents'] )){
+                $array = explode(',',$_POST['tags']);
+                
                 echo "<script>window.location='mycontents.php';</script>";
             }
         }

@@ -266,6 +266,8 @@ class DatabaseHandler {
             throw new Exception("Failed to upload lyrics.. :( Please, try it later");
         }
     }
+
+    
 }
 
 function CreateContentID($type){
