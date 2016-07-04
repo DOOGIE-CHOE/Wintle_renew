@@ -1,7 +1,6 @@
 <?php
 include_once 'function.php';
 
-
 session_start();
 
 $top_fst_text = "Sign In";

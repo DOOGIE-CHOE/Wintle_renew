@@ -6,7 +6,7 @@
  * Time: 8:42 PM
  */
 
-
+include_once '../GlobalData.php';
 include_once 'function.php';
 
 /*session_start();
@@ -42,8 +42,14 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
     <script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 
     <script>
+
+        function isEmpty( el ){
+            return $.trim(el.html());
+        }
+
         //tag-it
         $(function() {
+            //hashtag events
             $('#HashTags').tagit({
                 //evert for after putting tags
                 afterTagAdded: function(evt, ui) {
@@ -58,7 +64,15 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
                     }
             }
             });
+            $("#button").click(function(){
+                if (isEmpty($("#InputTitle")) || isEmpty($("#InputContents")) || isEmpty($("#hashtags"))) {
+                    alert('Fill out the form');
+                }else{
+                    alert('good');
+                }
+            });
         });
+
     </script>
 
     <style>
@@ -95,10 +109,10 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
 
     <a href="#popup2"><button>Click me</button></a>
 
-<?php
-
+<?
 $b = CreateContentID("lyrics");
 echo $b;
+
 ?>
 </div>
 <div id="popup2" class="overlay" >
@@ -109,10 +123,11 @@ echo $b;
             <br><br>
             <div class="backboard" style="height:500px; width:780px">
                 <div class="SignUp">
-                    <input type="text" name="InputTitle" style="font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Title">
-                    <textarea class="InputContents" name="InputContents" rows="10" cols="40" required placeholder="Contents"></textarea>
+                    <input type="text" id="InputTitle" name="InputTitle" style="font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Title">
+                    <textarea class="InputContents" id="InputContents" name="InputContents" rows="10" cols="40" required placeholder="Contents"></textarea>
                     <input name="tags" id="HashTags" required placeholder="Add hashtags">
-                    <input type="submit" name="submit" value="Upload">
+                    <!--<input type="submit" name="submit" value="Upload">-->
+                    <button id="button">s</button>
                 </div>
             </div>
         </div>
@@ -128,7 +143,11 @@ echo $b;
 <?php
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-try{
+    $test = $_POST['InputTitle'];
+
+
+
+/*try{
     $db = new DatabaseHandler();
     if($db->ConnectDB()){
         $contentid = CreateContentID("lyrics");
@@ -146,7 +165,7 @@ try{
 }catch(Exception $e){
     $db->DisconnectDB();
     Failed($e->getMessage());
-}
+}*/
 
 }
 

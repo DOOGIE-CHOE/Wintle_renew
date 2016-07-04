@@ -1,3 +1,4 @@
+GRANT
 DELIMITER $$
 create procedure UploadLyrics(
 in _email_address varchar(20),

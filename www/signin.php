@@ -1,5 +1,7 @@
 <?php
 include_once 'function.php';
+include_once '../GlobalData.php';
+
 session_start();
 
 if(isset($_SESSION['valid_user'])){
