@@ -248,10 +248,34 @@ class DatabaseHandler {
     }
 
 
-    function UploadLyrics($id, $title, $contents){
+    function UploadLyrics($id, $title, $contents, $hashtags){
+        //turn off auto commit
+        mysqli_autocommit($this->conn,FALSE);
 
-        $sql = "INSERT INTO lyrics(contents_id, title, contents)  VALUES('$id','$title','$contents')";
+        $result = true;
 
+        mysqli_query($this->conn, "INSERT INTO lyrics(contents_id, title, contents)  VALUES('$id','$title','$contents')") ? null : $result = false;
+        mysqli_rollback($this->conn);
+
+        mysqli_query($this->conn, "INSERT INTO lyricslikes(contents_id) VALUES ('$id','asd')")  ? null : $result = false;
+
+        foreach($hashtags as $hash){
+            mysqli_query($this->conn,"INSERT INTO lyricshash(contents_id,hashtag) VALUES('$id','$hash')")  ? null : $result = false;
+        }
+
+        $result ? mysqli_commit($this->conn) : mysqli_rollback($this->conn);
+        return $result;
+        //
+
+        //turn on autocommit (Because other queries are one line and don't need to use transaction)
+        //mysqli_autocommit($this->conn, true);
+
+        //if it's failed, rollback all queries
+
+       // return true;
+
+
+        /*
         if($this->conn->query($sql) === TRUE) {
             $sql = "INSERT INTO lyricslikes(contents_id) VALUES ('$id')";
             if($this->conn->query($sql) ===TRUE){
@@ -264,7 +288,7 @@ class DatabaseHandler {
             }
         }else{
             throw new Exception("Failed to upload lyrics.. :( Please, try it later");
-        }
+        }*/
     }
 
     
