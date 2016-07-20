@@ -1,7 +1,10 @@
 <?php
 include_once 'function.php';
 
-session_start();
+if(!isset($_SESSION))
+{
+    session_start();
+}
 
 $top_fst_text = "Sign In";
 $top_snd_text = "Sign Up";
@@ -222,7 +225,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!empty($response)) {
             $cap = new Verification();
             $verified = $cap->VerifyCaptcha($response);
-
             //if reCAPTCHA is verified
             if ($verified) {
                 $db = new DatabaseHandler();

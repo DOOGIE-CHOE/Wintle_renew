@@ -21,19 +21,18 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
         function hash(){
             var textarea = document.getElementById("displayhash");
             var submithash = document.getElementById("submithash");
-
             <?php
             $string = " ";
-
-            foreach($_SESSION['hash'] as $item=>$value){
-                $string .= $value;
+            if(is_array($_SESSION['hash'])) {
+                foreach ($_SESSION['hash'] as $value) {
+                    $string .= $value;
+                }
             }
 
             ?>
             if(submithash.value == "Add"){
                 textarea.style.display = '';
                 textarea.value = '<?php  echo $string;?>';
-                alert('<?php echo $string ?>');
                 submithash.value = "Submit";
             }
             else if(submithash.value == "Submit"){
@@ -169,9 +168,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     if($db->ConnectDB()){
                         $list = $db->GetHashTags($_SESSION['email_address']);
                         $_SESSION['hash'] = $list;
-                        foreach($list as $hash){
-                            echo $hash;
-                            echo "&nbsp;";
+                        if(is_array($list)) {
+                            foreach ($list as $hash) {
+                                echo $hash;
+                                echo "&nbsp;";
+                            }
                         }
                     }
                     $db->DisconnectDB();
@@ -180,7 +181,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 }
                 ?>
                 <textarea id="displayhash" rows="5" cols="40" style="display: none"></textarea>
-                <input type="button" id="submithash" value="Add" onclick="hash()">
+                <input type="button" id="submithash" value="Add" onclick="hash();">
 
             </div>
         </div>
