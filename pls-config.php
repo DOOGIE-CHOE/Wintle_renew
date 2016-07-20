@@ -9,11 +9,8 @@
 $testvar = 1;
 $xml_string = file_get_contents('C:\Users\Daniel\Documents\GitHub\Wintle_renew\data.xml');
 $xml = simplexml_load_string($xml_string);*/
-
 define("DBSERVERNAME", "localhost");     // The host you want to connect to.
-define("DBUSERNAME", "pollo112");    // The database username.
-define("DBPASSWORD", "wintle1091!");    // The database password.
-define("DBNAME", "pollo112");    // The database name.
-
+define("DBUSERNAME", "root");    // The database username.
+define("DBPASSWORD", "daniel12066@@!");    // The database password.
+define("DBNAME", "wintle");    // The database name.
 ?>
-
