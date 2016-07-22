@@ -26,20 +26,40 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="css/javascript.fullPage.css"/>
+
     <link rel="stylesheet" href="css/style.css">
 
+
+    <!-- Google web fonts -->
+    <link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel='stylesheet' />
+
+
+    <!-- --------- tag-it ----------->
     <!-- default theme -->
     <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
-
+    <script src="js/tag-it/tag-it.js" type="text/javascript" charset="utf-8"></script>
     <!--
         flick theme
         <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
         <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
     -->
+
+
+    <!------------jquery import ----------->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <!------------ Drag And Drop Upload ----------->
+    <link rel="stylesheet" href="css/dropupload.css">
+    <!-- jQuery File Upload Dependencies -->
+    <script src="js/dropupload/jquery.knob.js"></script>
+    <script src="js/dropupload/jquery.ui.widget.js"></script>
+    <script src="js/dropupload/jquery.iframe-transport.js"></script>
+    <script src="js/dropupload/jquery.fileupload.js"></script>
+    <!-- main JS file -->
+    <script src="js/dropupload/script.js"></script>
 
     <script>
         function LoadMelodyForm(){
@@ -47,9 +67,6 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
         }
 
 
-        function isEmpty( el ){
-            return $.trim(el.html());
-        }
 
         //tag-it
         $(function() {
@@ -68,14 +85,8 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
                     }
                 }
             });
-            /*$("#button").click(function(){
-             if (isEmpty($("#InputTitle")) || isEmpty($("#InputContents")) || isEmpty($("#hashtags"))) {
-             alert('Fill out the form');
-             }else{
-             alert('good');
-             }
-             });*/
 
+            //Ajax lyrics upload
             var request;
             $("#submitform").submit(function(event){
 

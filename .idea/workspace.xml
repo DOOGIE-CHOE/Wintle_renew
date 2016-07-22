@@ -2,8 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="102ef2a4-7ea1-4d54-9f53-9fd16095aa26" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/img/border-image.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/img/icons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/css/dropupload.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/js/dropupload/jquery.fileupload.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/js/dropupload/jquery.iframe-transport.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/js/dropupload/jquery.knob.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/js/dropupload/jquery.ui.widget.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/js/dropupload/script.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/www/js/javascript.fullPage.js" afterPath="$PROJECT_DIR$/www/js/mainpage/javascript.fullPage.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/www/js/javascript.fullPage.min.js" afterPath="$PROJECT_DIR$/www/js/mainpage/javascript.fullPage.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/www/js/tag-it.js" afterPath="$PROJECT_DIR$/www/js/tag-it/tag-it.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/www/js/tag-it.min.js" afterPath="$PROJECT_DIR$/www/js/tag-it/tag-it.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/create.txt" afterPath="$PROJECT_DIR$/db/create.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.php" afterPath="$PROJECT_DIR$/www/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/mycontents.php" afterPath="$PROJECT_DIR$/www/mycontents.php" />
     </list>
     <ignored path="wintle.iws" />
@@ -84,8 +96,28 @@
       <file leaf-file-name="mycontents.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/mycontents.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2670">
-              <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
+            <state relative-caret-position="264">
+              <caret line="58" column="68" selection-start-line="58" selection-start-column="68" selection-end-line="58" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jquery.fileupload.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/dropupload/jquery.fileupload.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="576">
+              <caret line="102" column="16" selection-start-line="102" selection-start-column="16" selection-end-line="102" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dropupload.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/css/dropupload.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="348">
+              <caret line="115" column="16" selection-start-line="115" selection-start-column="16" selection-end-line="115" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -104,8 +136,8 @@
       <file leaf-file-name="uploadfunction.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/uploadfunction.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+            <state relative-caret-position="288">
+              <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
               <folding>
                 <element signature="e#6#88#0#PHP" expanded="true" />
               </folding>
@@ -158,6 +190,7 @@
         <option value="$PROJECT_DIR$/www/signin.php" />
         <option value="$PROJECT_DIR$/www/function.php" />
         <option value="$PROJECT_DIR$/www/uploadfunction.php" />
+        <option value="$PROJECT_DIR$/www/css/dropupload.css" />
         <option value="$PROJECT_DIR$/www/mycontents.php" />
       </list>
     </option>
@@ -266,6 +299,46 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wintle_renew" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wintle_renew" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dropupload" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wintle_renew" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wintle_renew" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="css" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -283,15 +356,17 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Daniel\Documents\GitHub\Wintle_renew\www\img" />
+      <recent name="C:\Users\Daniel\Documents\GitHub\Wintle_renew\www\js\dropupload" />
+      <recent name="$PROJECT_DIR$/img" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Daniel\Documents\GitHub\Wintle_renew\www\js\tag-it" />
+      <recent name="C:\Users\Daniel\Documents\GitHub\Wintle_renew\www\js\mainpage" />
       <recent name="C:\Users\Daniel\Documents\GitHub\Wintle_renew\www\js" />
       <recent name="C:\Users\Daniel\Documents\GitHub\Wintle_renew\www\css" />
       <recent name="C:\Users\Daniel\Documents\GitHub\Wintle_renew\www\img" />
-      <recent name="C:\Users\Daniel\Documents\GitHub\Wintle_renew\www\background" />
-      <recent name="C:\Users\Daniel\Documents\GitHub\Wintle_renew\www" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/img" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.signin.php">
@@ -416,15 +491,15 @@
       <workItem from="1469081710924" duration="4138000" />
       <workItem from="1469091452040" duration="21000" />
       <workItem from="1469112323136" duration="26000" />
-      <workItem from="1469165155656" duration="5817000" />
+      <workItem from="1469165155656" duration="8496000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="215543000" />
+    <option name="totallyTimeSpent" value="218222000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.153125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -466,8 +541,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/css/signin.css" />
-    <entry file="file://$PROJECT_DIR$/signin.php" />
     <entry file="file://$PROJECT_DIR$/intro.php" />
     <entry file="file://$PROJECT_DIR$/css/style.css" />
     <entry file="file://$PROJECT_DIR$/css/signin.css" />
@@ -523,13 +596,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/javascript.fullPage.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/leftsidebar.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1104">
@@ -540,13 +606,6 @@
     <entry file="file://$PROJECT_DIR$/www/img/PAGE/Cloud_paper_top.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/javascript.fullPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/ProfileImages/mask.png">
@@ -575,7 +634,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/tag-it.js">
+    <entry file="file://$PROJECT_DIR$/www/js/tag-it/tag-it.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13128">
           <caret line="572" column="8" selection-start-line="572" selection-start-column="8" selection-end-line="572" selection-end-column="8" />
@@ -643,16 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/uploadfunction.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
-          <folding>
-            <element signature="e#6#88#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2700">
@@ -692,10 +741,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/uploadfunction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+          <folding>
+            <element signature="e#6#88#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/mainpage/javascript.fullPage.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="21" column="28" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/mainpage/javascript.fullPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/dropupload/jquery.fileupload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="102" column="16" selection-start-line="102" selection-start-column="16" selection-end-line="102" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/css/dropupload.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="115" column="16" selection-start-line="115" selection-start-column="16" selection-end-line="115" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/mycontents.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2670">
-          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
+        <state relative-caret-position="264">
+          <caret line="58" column="68" selection-start-line="58" selection-start-column="68" selection-end-line="58" selection-end-column="68" />
           <folding />
         </state>
       </provider>

@@ -150,7 +150,7 @@ if(isset($_SESSION['valid_user'])){
     </div>
 </div>
 
-<script type="text/javascript" src="js/javascript.fullPage.js"></script>
+<script type="text/javascript" src="js/mainpage/javascript.fullPage.js"></script>
 <script type="text/javascript">
     fullpage.initialize('#fullpage', {
         anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],
