@@ -9,7 +9,6 @@ if(isset($_SESSION['valid_user'])){
     echo "<script>window.location='index.php'</script>";
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -167,7 +166,7 @@ if(isset($_SESSION['valid_user'])){
 </head>
 <body>
 
-<form action="" method = "post">
+<form action="" method = "post"  enctype="multipart/form-data">
 <div class="main">
     <div class="header">
         <a href="index.php"><img src="img/small_logo_black.png"></a>

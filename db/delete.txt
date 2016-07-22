@@ -1,0 +1,3 @@
+delete from mylyrics where email_address <> '';
+delete from lyricshash where contents_id <> '';
+delete from lyrics where contents_id <> '';

@@ -248,47 +248,21 @@ class DatabaseHandler {
     }
 
 
-    function UploadLyrics($id, $title, $contents, $hashtags){
-        //turn off auto commit
-        mysqli_autocommit($this->conn,FALSE);
+    function UploadLyrics($email_address,$contents_id, $title, $contents, $hashtags){
 
-        $result = true;
+        //Call Stored Procedure from MySql
+        $call = $this->conn->prepare("CALL UploadLyrics(?,?,?,?,?,@result)");
 
-        mysqli_query($this->conn, "INSERT INTO lyrics(contents_id, title, contents)  VALUES('$id','$title','$contents')") ? null : $result = false;
-        mysqli_rollback($this->conn);
+        //Put arguments
+        $call->bind_param('sssss',$email_address,$contents_id,$title,$contents,$hashtags);
+        $call->execute();
 
-        mysqli_query($this->conn, "INSERT INTO lyricslikes(contents_id) VALUES ('$id','asd')")  ? null : $result = false;
+        //Get output from Stored Procedure
+        $select = $this->conn->query('select @result');
+        $result = $select->fetch_assoc();
 
-        foreach($hashtags as $hash){
-            mysqli_query($this->conn,"INSERT INTO lyricshash(contents_id,hashtag) VALUES('$id','$hash')")  ? null : $result = false;
-        }
-
-        $result ? mysqli_commit($this->conn) : mysqli_rollback($this->conn);
-        return $result;
-        //
-
-        //turn on autocommit (Because other queries are one line and don't need to use transaction)
-        //mysqli_autocommit($this->conn, true);
-
-        //if it's failed, rollback all queries
-
-       // return true;
-
-
-        /*
-        if($this->conn->query($sql) === TRUE) {
-            $sql = "INSERT INTO lyricslikes(contents_id) VALUES ('$id')";
-            if($this->conn->query($sql) ===TRUE){
-                return true;
-            }else{
-                $sql = "DELETE a, b from lyrics a INNER  join mylyrics b on a.contents_id = b.contents_id where a.contents_id = '$id'";
-                if($this->conn->query($sql) === TRUE){
-                    throw new Exception("Failed to upload lyrics.. :( Please, try it later");
-                }
-            }
-        }else{
-            throw new Exception("Failed to upload lyrics.. :( Please, try it later");
-        }*/
+        //true = 0, false = -1
+        return $result['@result'];
     }
 
     

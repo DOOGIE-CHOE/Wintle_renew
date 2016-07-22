@@ -18,24 +18,24 @@ include_once 'function.php';
 
 $data = array();
 $data['success'] = false;
-$hashtags = explode(',',$_POST['HashTags']);
 
 try{
     $db = new DatabaseHandler();
     if($db->ConnectDB()){
         $contentid = CreateContentID("lyrics");
-        if($db->RegisterContentID($_SESSION['email_address'],$contentid)){
-            if($db->UploadLyrics($contentid, $_POST['InputTitle'] , $_POST['InputContents'],$hashtags )){
-                $data['success'] = true;
-            }
+        $result = $db->UploadLyrics($_SESSION['email_address'], $contentid,$_POST['InputTitle'] ,$_POST['InputContents'] , $_POST['HashTags']);
+        if($result == 0){
+            $data['success'] = true;
+        }
+        else{
+            $data['success'] = false;
         }
     }
 }catch(Exception $e){
+    exit;
+}finally{
     $db->DisconnectDB();
     echo json_encode($data);
-    exit;
 }
-
-echo json_encode($data);
 
 ?>
