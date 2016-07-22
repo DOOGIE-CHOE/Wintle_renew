@@ -42,6 +42,10 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
     <script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 
     <script>
+        function LoadMelodyForm(){
+            
+        }
+
 
         function isEmpty( el ){
             return $.trim(el.html());
@@ -137,6 +141,9 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
             width: 700px;
             font-size:20px;
         }
+        #Type{
+            color:black;
+        }
     </style>
 </head>
 
@@ -167,6 +174,11 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
             <br><br>
             <div class="backboard" style="height:500px; width:780px">
                 <div class="SignUp">
+                    <div id="Type">
+                    <input type="radio" name="type" value="Lyrics" checked> Lyrics
+                    <input type="radio" name="type" value="Melody" onclick=""> Melody
+                    <input type="radio" name="type" value="other"> Other <br>
+                    </div>
                     <input type="text" id="InputTitle" name="InputTitle" style="font-size: 20px; padding: 15px 15px 15px 15px; margin: 10px 10px 10px 10px" required placeholder="Title">
                     <textarea class="InputContents" id="InputContents" name="InputContents" rows="10" cols="40" required placeholder="Contents"></textarea>
                     <input name="HashTags" id="HashTags" required placeholder="Add hashtags">

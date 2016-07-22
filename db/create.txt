@@ -41,5 +41,8 @@ likes int default 0
 );
 
 create table lyricscomments(
-
+contents_id varchar(30) not null,
+email_address varchar(20) not null,
+comments varchar(1000) not null,
+created_date timestamp default current_timestamp
 );
